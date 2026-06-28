@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FinTrack Pro</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="layout">
+      <aside>
+        <div class="sidebar">
+          <div class="sidebar-top">
+            <div class="logo">
+              <i class="ri-stack-fill"></i>
+              <div class="logo-name">
+                <h1>FinTrack Pro</h1>
+                <p>Enterprise Finance</p>
+              </div>
+            </div>
+
+            <div class="sidebar-links">
+              <button id="dashboard-btn">
+                <i class="ri-microsoft-line"></i><span>Dashboard</span>
+              </button>
+              <button id="setting-btn">
+                <i class="ri-settings-5-line"></i><span>Settings</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="sidebar-bottom">
+            <button id="add-transaction">
+              <i class="ri-add-line"></i><span>Add Transaction</span>
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- sidebar done  -->
+
+      <div class="right-layout">
+        <nav>
+          <p class="user-name">Farhan</p>
+          <button id="logout">
+            <i class="ri-logout-box-r-line"></i><span>Logout</span>
+          </button>
+        </nav>
+
+        <div class="dashboard">
+          <div class="dashboard-heading">
+            <h1>Financial Overview</h1>
+            <p>Real-time tracking application</p>
+          </div>
+          <div class="dashboard-cards">
+            <div class="cards">
+              <i
+                ><span class="material-symbols-outlined">
+                  account_balance
+                </span></i
+              >
+              <div class="card-info">
+                <p class="cards-tag">Current Balance</p>
+                <h2 class="amount">
+                  <span class="currency">$</span
+                  ><span class="balance">0.00</span>
+                </h2>
+              </div>
+            </div>
+
+            <div class="cards">
+              <i
+                ><span class="material-symbols-outlined"> trending_up </span></i
+              >
+              <div class="card-info">
+                <p class="cards-tag">Total Income</p>
+                <h2 class="amount">
+                  <span class="currency">$</span
+                  ><span class="balance">0.00</span>
+                </h2>
+              </div>
+            </div>
+
+            <div class="cards">
+              <i
+                ><span class="material-symbols-outlined">
+                  trending_down
+                </span></i
+              >
+              <div class="card-info">
+                <p class="cards-tag">Total Expense</p>
+                <h2 class="amount">
+                  <span class="currency">$</span
+                  ><span class="balance">0.00</span>
+                </h2>
+              </div>
+            </div>
+
+            <div class="cards">
+              <i><span class="material-symbols-outlined"> savings </span></i>
+              <div class="card-info">
+                <p class="cards-tag">Total Transactions</p>
+                <h2 class="amount">
+                  <span class="currency">$</span
+                  ><span class="balance">0.00</span>
+                </h2>
+              </div>
+            </div>
+          </div>
+
+          <div class="dashboard-content">
+            <div class="dashboard-chart">
+              <h2>Cash Flow Analysis</h2>
+              <div class="chart-container"></div>
+            </div>
+            <div class="dashboard-Preferences">
+              <h2>Preferences</h2>
+              <div class="theme">
+                <span>Dark Mode</span>
+                <label class="toggle">
+                  <input type="checkbox" id="darkMode" />
+
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <button id="reset">
+                <i><span class="material-symbols-outlined"> delete </span></i>
+                <span>Reset All Data</span>
+              </button>
+            </div>
+          </div>
+
+          <section class="transactions">
+            <h2>All Transactions</h2>
+
+            <div class="transaction-controls">
+              <div class="search-box">
+                <i class="ri-search-line"></i>
+                <input type="text" placeholder="Search transactions..." />
+              </div>
+
+              <select id="filter">
+                <option value="all">All Types</option>
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+              </select>
+            </div>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Description</th>
+                  <th>Category</th>
+                  <th>Amount</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+
+              <tbody id="transaction-list">
+                <tr>
+                  <td>28 Jun 2026</td>
+
+                  <td>Netflix Subscription</td>
+
+                  <td>
+                    <span class="category entertainment"> Entertainment </span>
+                  </td>
+
+                  <td class="expense">-$20.00</td>
+
+                  <td>
+                    <button class="delete-btn">
+                      <i class="ri-delete-bin-6-line"></i>
+                    </button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>28 Jun 2026</td>
+
+                  <td>Salary</td>
+
+                  <td>
+                    <span class="category salary"> Salary </span>
+                  </td>
+
+                  <td class="income">+$1500.00</td>
+
+                  <td>
+                    <button class="delete-btn">
+                      <i class="ri-delete-bin-6-line"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
