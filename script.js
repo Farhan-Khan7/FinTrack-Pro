@@ -351,3 +351,4 @@ transactionSubmitBtn.addEventListener("click", function (event) {
 })
 
 updateDashboard()
+
