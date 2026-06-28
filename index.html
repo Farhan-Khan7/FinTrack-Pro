@@ -1,335 +1,352 @@
 <!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FinTrack Pro</title>
     <link rel="stylesheet" href="style.css" />
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-</head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+  </head>
 
-<body>
+  <body>
     <div class="auth-container">
-        <div class="auth-card signup-card">
-            <h1>Create Account</h1>
-            <p>Join FinTrack Pro</p>
+      <div class="auth-card signup-card">
+        <h1>Create Account</h1>
+        <p>Join FinTrack Pro</p>
 
-            <form id="signup-form">
-                <div class="input-group">
-                    <label for="signup-username">Choose a Username</label>
+        <form id="signup-form">
+          <div class="input-group">
+            <label for="signup-username">Choose a Username</label>
 
-                    <input type="text" id="signup-username" placeholder="Enter username" />
+            <input
+              type="text"
+              id="signup-username"
+              placeholder="Enter username"
+            />
 
-                    <small class="error" id="signup-username-error"></small>
-                </div>
+            <small class="error" id="signup-username-error"></small>
+          </div>
 
-                <div class="input-group">
-                    <label for="signup-password">Password</label>
+          <div class="input-group">
+            <label for="signup-password">Password</label>
 
-                    <input type="password" id="signup-password" placeholder="Enter password" />
+            <input
+              type="password"
+              id="signup-password"
+              placeholder="Enter password"
+            />
 
-                    <small class="error" id="signup-password-error"></small>
-                </div>
+            <small class="error" id="signup-password-error"></small>
+          </div>
 
-                <button type="submit" class="btn register-btn">Register</button>
-            </form>
+          <button type="submit" class="btn register-btn">Register</button>
+        </form>
 
-            <p class="switch-page">
-                Already have an account?
-                <a href="#" id="show-login">Login here</a>
-            </p>
-        </div>
+        <p class="switch-page">
+          Already have an account?
+          <a href="#" id="show-login">Login here</a>
+        </p>
+      </div>
 
-        <!-- login page -->
+      <!-- login page -->
 
-        <div class="auth-card login-card">
-            <h1>Welcome Back</h1>
-            <p>Login to FinTrack Pro</p>
+      <div class="auth-card login-card">
+        <h1>Welcome Back</h1>
+        <p>Login to FinTrack Pro</p>
 
-            <form id="login-form">
-                <div class="input-group">
-                    <label for="login-username">Username</label>
+        <form id="login-form">
+          <div class="input-group">
+            <label for="login-username">Username</label>
 
-                    <input type="text" id="login-username" placeholder="Enter username" />
+            <input
+              type="text"
+              id="login-username"
+              placeholder="Enter username"
+            />
 
-                    <small class="error" id="login-username-error"></small>
-                </div>
+            <small class="error" id="login-username-error"></small>
+          </div>
 
-                <div class="input-group">
-                    <label for="login-password">Password</label>
+          <div class="input-group">
+            <label for="login-password">Password</label>
 
-                    <input type="password" id="login-password" placeholder="Enter password" />
+            <input
+              type="password"
+              id="login-password"
+              placeholder="Enter password"
+            />
 
-                    <small class="error" id="login-password-error"></small>
-                </div>
+            <small class="error" id="login-password-error"></small>
+          </div>
 
-                <button type="submit" class="btn login-btn">Login</button>
-            </form>
+          <button type="submit" class="btn login-btn">Login</button>
+        </form>
 
-            <p class="switch-page">
-                Don't have an account?
-                <a href="#" id="show-signup">Register here</a>
-            </p>
-        </div>
+        <p class="switch-page">
+          Don't have an account?
+          <a href="#" id="show-signup">Register here</a>
+        </p>
+      </div>
     </div>
 
     <!-- authentication done  -->
     <div class="layout">
-        <aside>
-            <div class="sidebar">
-                <div class="sidebar-top">
-                    <div class="logo">
-                        <i class="ri-stack-fill"></i>
-                        <div class="logo-name">
-                            <h1>FinTrack Pro</h1>
-                            <p>Enterprise Finance</p>
-                        </div>
-                    </div>
-
-                    <div class="sidebar-links">
-                        <button id="dashboard-btn">
-                            <i class="ri-microsoft-line"></i><span>Dashboard</span>
-                        </button>
-                        <button id="setting-btn">
-                            <i class="ri-settings-5-line"></i><span>Settings</span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="sidebar-bottom">
-                    <button id="add-transaction">
-                        <i class="ri-add-line"></i><span>Add Transaction</span>
-                    </button>
-                </div>
+      <aside>
+        <div class="sidebar">
+          <div class="sidebar-top">
+            <div class="logo">
+              <i class="ri-stack-fill"></i>
+              <div class="logo-name">
+                <h1>FinTrack Pro</h1>
+                <p>Enterprise Finance</p>
+              </div>
             </div>
-        </aside>
 
-        <!-- sidebar done  -->
-
-        <div class="right-layout">
-            <nav>
-                <p class="user-name"></p>
-                <button id="logout">
-                    <i class="ri-logout-box-r-line"></i><span>Logout</span>
-                </button>
-            </nav>
-
-            <div class="dashboard">
-                <div class="dashboard-heading">
-                    <h1>Financial Overview</h1>
-                    <p>Real-time tracking application</p>
-                </div>
-                <div class="dashboard-cards">
-                    <div class="cards">
-                        <i><span class="material-symbols-outlined">
-                                account_balance
-                            </span></i>
-                        <div class="card-info">
-                            <p class="cards-tag">Current Balance</p>
-                            <h2 class="amount">
-                                <span class="currency">$</span><span class="currentBalance">0.00</span>
-                            </h2>
-                        </div>
-                    </div>
-
-                    <div class="cards">
-                        <i><span class="material-symbols-outlined"> trending_up </span></i>
-                        <div class="card-info">
-                            <p class="cards-tag">Total Income</p>
-                            <h2 class="amount">
-                                <span class="currency">$</span><span class="totalIncome">0.00</span>
-                            </h2>
-                        </div>
-                    </div>
-
-                    <div class="cards">
-                        <i><span class="material-symbols-outlined">
-                                trending_down
-                            </span></i>
-                        <div class="card-info">
-                            <p class="cards-tag">Total Expense</p>
-                            <h2 class="amount">
-                                <span class="currency">$</span><span class="totalExpenses">0.00</span>
-                            </h2>
-                        </div>
-                    </div>
-
-                    <div class="cards">
-                        <i><span class="material-symbols-outlined"> savings </span></i>
-                        <div class="card-info">
-                            <p class="cards-tag">Total Transactions</p>
-                            <h2 class="amount">
-                                <span class="transactionCount currency">0</span>
-                            </h2>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dashboard-content">
-                    <div class="dashboard-chart">
-                        <h2>Cash Flow Analysis</h2>
-                        <div class="chart-container">
-                            <canvas id="myChart"></canvas>
-                        </div>
-                    </div>
-                    <div class="dashboard-Preferences">
-                        <h2>Preferences</h2>
-                        <div class="theme">
-                            <span>Dark Mode</span>
-                            <label class="toggle">
-                                <input type="checkbox" id="darkMode" />
-
-                                <span class="slider"></span>
-                            </label>
-                        </div>
-                        <button id="reset">
-                            <i><span class="material-symbols-outlined"> delete </span></i>
-                            <span>Reset All Data</span>
-                        </button>
-                    </div>
-                </div>
-
-                <section class="transactions">
-                    <h2>All Transactions</h2>
-
-                    <div class="transaction-controls">
-                        <div class="search-box">
-                            <i class="ri-search-line"></i>
-                            <input type="text" placeholder="Search transactions..." />
-                        </div>
-
-                        <select id="filter">
-                            <option value="all">All Types</option>
-                            <option value="income">Income</option>
-                            <option value="expense">Expense</option>
-                        </select>
-                    </div>
-
-                    <div class="transaction-list">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Description</th>
-                                    <th>Category</th>
-                                    <th>Amount</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-
-                            <tbody id="transaction-list">
-                                <tr>
-                                    <td>28 Jun 2026</td>
-
-                                    <td>Netflix Subscription</td>
-
-                                    <td>
-                                        <span class="category entertainment">
-                                            Entertainment
-                                        </span>
-                                    </td>
-
-                                    <td class="expense">-$20.00</td>
-
-                                    <td>
-                                        <button class="delete-btn">
-                                            <i class="ri-delete-bin-6-line"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>28 Jun 2026</td>
-
-                                    <td>Salary</td>
-
-                                    <td>
-                                        <span class="category salary"> Salary </span>
-                                    </td>
-
-                                    <td class="income">+$1500.00</td>
-
-                                    <td>
-                                        <button class="delete-btn">
-                                            <i class="ri-delete-bin-6-line"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
+            <div class="sidebar-links">
+              <button id="dashboard-btn">
+                <i class="ri-microsoft-line"></i><span>Dashboard</span>
+              </button>
+              <button id="setting-btn">
+                <i class="ri-settings-5-line"></i><span>Settings</span>
+              </button>
             </div>
+          </div>
+
+          <div class="sidebar-bottom">
+            <button id="add-transaction">
+              <i class="ri-add-line"></i><span>Add Transaction</span>
+            </button>
+          </div>
         </div>
+      </aside>
+
+      <!-- sidebar done  -->
+
+      <div class="right-layout">
+        <nav>
+          <p class="user-name"></p>
+          <button id="logout">
+            <i class="ri-logout-box-r-line"></i><span>Logout</span>
+          </button>
+        </nav>
+
+        <div class="dashboard">
+          <div class="dashboard-heading">
+            <h1>Financial Overview</h1>
+            <p>Real-time tracking application</p>
+          </div>
+          <div class="dashboard-cards">
+            <div class="cards">
+              <i
+                ><span class="material-symbols-outlined">
+                  account_balance
+                </span></i
+              >
+              <div class="card-info">
+                <p class="cards-tag">Current Balance</p>
+                <h2 class="amount">
+                  <span class="currency">$</span
+                  ><span class="currentBalance">0.00</span>
+                </h2>
+              </div>
+            </div>
+
+            <div class="cards">
+              <i
+                ><span class="material-symbols-outlined"> trending_up </span></i
+              >
+              <div class="card-info">
+                <p class="cards-tag">Total Income</p>
+                <h2 class="amount">
+                  <span class="currency">$</span
+                  ><span class="totalIncome">0.00</span>
+                </h2>
+              </div>
+            </div>
+
+            <div class="cards">
+              <i
+                ><span class="material-symbols-outlined">
+                  trending_down
+                </span></i
+              >
+              <div class="card-info">
+                <p class="cards-tag">Total Expense</p>
+                <h2 class="amount">
+                  <span class="currency">$</span
+                  ><span class="totalExpenses">0.00</span>
+                </h2>
+              </div>
+            </div>
+
+            <div class="cards">
+              <i><span class="material-symbols-outlined"> savings </span></i>
+              <div class="card-info">
+                <p class="cards-tag">Total Transactions</p>
+                <h2 class="amount">
+                  <span class="transactionCount currency">0</span>
+                </h2>
+              </div>
+            </div>
+          </div>
+
+          <div class="dashboard-content">
+            <div class="dashboard-chart">
+              <h2>Cash Flow Analysis</h2>
+              <div class="chart-container">
+                <canvas id="myChart"></canvas>
+              </div>
+            </div>
+            <div class="dashboard-Preferences">
+              <h2>Preferences</h2>
+              <div class="theme">
+                <span>Dark Mode</span>
+                <label class="toggle">
+                  <input type="checkbox" id="darkMode" />
+
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <button id="reset">
+                <i><span class="material-symbols-outlined"> delete </span></i>
+                <span>Reset All Data</span>
+              </button>
+            </div>
+          </div>
+
+          <section class="transactions">
+            <h2>All Transactions</h2>
+
+            <div class="transaction-controls">
+              <div class="search-box">
+                <i class="ri-search-line"></i>
+                <input type="text" placeholder="Search transactions..." />
+              </div>
+
+              <select id="filter">
+                <option value="all">All Types</option>
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+              </select>
+            </div>
+
+            <div class="transaction-list">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+
+                <tbody id="transaction-list">
+                    <tr>
+                    <td>28 Jun 2026</td>
+
+                    <td>Salary</td>
+
+                    <td>
+                      <span class="category salary"> Salary </span>
+                    </td>
+
+                    <td class="income">+$1500.00</td>
+
+                    <td>
+                      <div class="actions">
+                        <i class="ri-pencil-ai-line edit"></i>
+                        <i class="ri-delete-bin-6-line delete"></i>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </div>
     </div>
 
     <div class="transaction-modal">
-        <div class="transaction-card">
-            <div class="modal-header">
-                <h2>Add Transaction</h2>
+      <div class="transaction-card">
+        <div class="modal-header">
+          <h2>Add Transaction</h2>
 
-                <button id="close-modal">
-                    <i class="ri-close-line"></i>
-                </button>
+          <button id="close-modal">
+            <i class="ri-close-line"></i>
+          </button>
+        </div>
+
+        <form id="transaction-form">
+          <div class="input-box">
+            <label>Type</label>
+
+            <select id="type">
+              <option value="Expense">Expense</option>
+              <option value="Income">Income</option>
+            </select>
+          </div>
+
+          <div class="input-box">
+            <label>Description</label>
+
+            <input
+              type="text"
+              id="description"
+              placeholder="e.g. Amazon, Salary, Coffee"
+            />
+          </div>
+
+          <div class="row">
+            <div class="input-box">
+              <label>Amount</label>
+
+              <input type="number" id="amount" placeholder="Enter amount" />
             </div>
 
-            <form id="transaction-form">
-                <div class="input-box">
-                    <label>Type</label>
+            <div class="input-box">
+              <label>Date</label>
 
-                    <select id="type">
-                        <option value="Expense">Expense</option>
-                        <option value="Income">Income</option>
-                    </select>
-                </div>
+              <input type="date" id="date" />
+            </div>
+          </div>
 
-                <div class="input-box">
-                    <label>Description</label>
+          <div class="input-box">
+            <label>Category</label>
 
-                    <input type="text" id="description" placeholder="e.g. Amazon, Salary, Coffee" />
-                </div>
+            <select id="category">
+              <option value="" selected disabled>Select a category</option>
 
-                <div class="row">
-                    <div class="input-box">
-                        <label>Amount</label>
+              <option value="food">Food & Dining</option>
+              <option value="shopping">Shopping</option>
+              <option value="bills">Recharge & Bills</option>
+              <option value="petrol">Petrol & Auto</option>
+              <option value="utilities">Utilities</option>
+              <option value="salary">Salary</option>
+              <option value="entertainment">Entertainment</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
 
-                        <input type="number" id="amount" placeholder="Enter amount" />
-                    </div>
-
-                    <div class="input-box">
-                        <label>Date</label>
-
-                        <input type="date" id="date" />
-                    </div>
-                </div>
-
-                <div class="input-box">
-                    <label>Category</label>
-
-                    <select id="category">
-                        <option selected disabled>Select a category</option>
-
-                        <option>Food & Dining</option>
-                        <option>Shopping</option>
-                        <option>Recharge & Bills</option>
-                        <option>Petrol & Auto</option>
-                        <option>Utilities</option>
-                        <option>Salary</option>
-                        <option>Entertainment</option>
-                        <option>Other</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="submit-btn">Add Transaction</button>
-            </form>
-        </div>
+          <button type="submit" class="submit-btn">Add Transaction</button>
+        </form>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>

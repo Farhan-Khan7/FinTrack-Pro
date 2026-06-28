@@ -785,45 +785,52 @@ td{
 }
 
 #transaction-list td{
-    padding:1rem .5rem;
+    padding:1rem 0rem;
     color:var(--heading);
     font-size:.95rem;
     vertical-align:middle;
 }
 
 .category{
+    margin-left:.7vw ;
     display:inline-flex;
     align-items:center;
     justify-content:center;
-    padding:.35rem .8rem;
+    padding:.35rem .9rem;
     border-radius: 7px;
     font-size:.85rem;
     font-weight:600;
     background-color: var(--slider-bg);
 }
+.income{
+    color: var(--income-text);
+}
 
 
-.delete-btn{
-    width:38px;
+
+.actions{
+    margin-left:.7vw ;
+    width:5VW;
     height:38px;
     display:flex;
-    justify-content:center;
+    justify-content:space-between;
     align-items:center;
     border:none;
     border-radius:10px;
-    background:var(--expense-bg);
-    color:var(--expense-text);
-    cursor:pointer;
+    /* background:var(--expense-bg); */
+    /* color:var(--expense-text); */
     transition:.25s;
 }
 
-.delete-btn:hover{
-    background:var(--expense-text);
-    color:var(--heading);
+.actions i:first-child{
+    cursor:pointer;
+    font-size:1.5rem;
+    color: var(--entertainment);
 }
-
-.delete-btn i{
-    font-size:1.1rem;
+.actions i:last-child{
+    cursor:pointer;
+    font-size: 1.5rem;
+    color: var(--expense-text );
 }
 
 

@@ -76,15 +76,15 @@ registerBtn.addEventListener("click", function (event) {
             password
         }
         localStorage.setItem("registerDetails", JSON.stringify(userDetails));
-        
+
         signupPage.style.display = "none"
         loginPage.style.display = "initial"
         localStorage.setItem("page", "login");
-        
+
     }
-    
+
     signupForm.reset();
-    
+
 })
 
 
@@ -97,13 +97,13 @@ loginBtn.addEventListener("click", function (event) {
     loginPasswordError.textContent = "";
     loginUsernameError.style.opacity = "0";
     loginPasswordError.style.opacity = "0";
-    
+
     const username = loginUsername.value.trim();
     const password = loginPassword.value.trim();
-    
+
     const userDetails = JSON.parse(localStorage.getItem("registerDetails"))
-    
-    
+
+
 
     if (username !== userDetails.username) {
         loginUsernameError.textContent = "Username is invalid.";
@@ -206,48 +206,48 @@ const chart = new Chart(ctx, {
         datasets: [{
             label: "Amount",
 
-            data: [0,0],
+            data: [0, 0],
 
-            backgroundColor:[
+            backgroundColor: [
                 "#22C55E",
                 "#EF4444"
             ],
 
-            borderRadius:8,
-            borderWidth:0,
-            barThickness:150
+            borderRadius: 8,
+            borderWidth: 0,
+            barThickness: 150
         }]
     },
 
-    options:{
+    options: {
 
-        responsive:true,
+        responsive: true,
 
-        maintainAspectRatio:false,
+        maintainAspectRatio: false,
 
-        plugins:{
-            legend:{
-                display:false
+        plugins: {
+            legend: {
+                display: false
             },
-            title:{
-                display:true,
-                text:"Income vs Expense"
+            title: {
+                display: true,
+                text: "Income vs Expense"
             }
         },
 
-        scales:{
+        scales: {
 
-            x:{
-                grid:{
-                    display:false
+            x: {
+                grid: {
+                    display: false
                 }
             },
 
-            y:{
-                beginAtZero:true,
+            y: {
+                beginAtZero: true,
 
-                ticks:{
-                    stepSize:100
+                ticks: {
+                    stepSize: 100
                 }
             }
         }
@@ -260,21 +260,21 @@ const Income = document.querySelector(".totalIncome");
 const Expenses = document.querySelector(".totalExpenses");
 const transactionCount = document.querySelector(".transactionCount")
 
-function updateDashboard(){
+function updateDashboard() {
 
     const transactions =
-    JSON.parse(localStorage.getItem("transactionDetails")) || [];
+        JSON.parse(localStorage.getItem("transactionDetails")) || [];
 
     let totalIncome = 0;
     let totalExpense = 0;
 
-    transactions.forEach(transaction=>{
+    transactions.forEach(transaction => {
 
-        if(transaction.transactionTag === "Income"){
+        if (transaction.transactionTag === "Income") {
 
             totalIncome += Number(transaction.transactionamount);
 
-        }else{
+        } else {
 
             totalExpense += Number(transaction.transactionamount);
 
@@ -282,7 +282,7 @@ function updateDashboard(){
 
     });
 
-    const balance = totalIncome-totalExpense;
+    const balance = totalIncome - totalExpense;
 
     Income.textContent = totalIncome;
 
@@ -295,13 +295,13 @@ function updateDashboard(){
         totalExpense
     ];
 
-    const max = Math.max(totalIncome,totalExpense);
+    const max = Math.max(totalIncome, totalExpense);
 
     chart.options.scales.y.suggestedMax =
-    max+100;
+        max + 100;
 
     chart.options.scales.y.ticks.stepSize =
-    Math.ceil((max+100)/10);
+        Math.ceil((max + 100) / 10);
 
     chart.update();
 
@@ -347,8 +347,73 @@ transactionSubmitBtn.addEventListener("click", function (event) {
     localStorage.setItem("transactionDetails", JSON.stringify(transactions));
 
     updateDashboard()
+    renderTransactions();
     transactionModel.style.display = "none"
 })
 
-updateDashboard()
 
+
+
+
+const transactionList = document.querySelector("#transaction-list");
+
+function renderTransactions() {
+
+    const transactions =
+        JSON.parse(localStorage.getItem("transactionDetails")) || [];
+
+    transactionList.innerHTML = "";
+
+    transactions.forEach((transaction, index) => {
+
+        transactionList.innerHTML += `
+
+            <tr>
+
+                <td>${transaction.transactiondate}</td>
+
+                <td>${transaction.transactiondesc}</td>
+
+                <td>
+
+                    <span class="category ${transaction.transactionCategory}">
+                        ${transaction.transactionCategory}
+                    </span>
+
+                </td>
+
+                <td class="${transaction.transactionTag === "Income"
+                ? "income"
+                : "expense"
+            }">
+
+                    ${transaction.transactionTag === "Income"
+                ? "+"
+                : "-"
+            }$${transaction.transactionamount}
+
+                </td>
+
+                <td>
+
+                    <div
+                        class="actions"
+                        data-index="${index}"
+                    >   
+                        <i class="ri-pencil-ai-line"></i>
+                        <i class="ri-delete-bin-6-line"></i>
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+}
+
+updateDashboard();
+
+renderTransactions();
