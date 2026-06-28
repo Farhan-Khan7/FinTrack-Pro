@@ -264,9 +264,10 @@ body{
     display:flex;
     justify-content: space-between;
     width:100%;
-    height:200vh;
+    height:auto;
     position:relative;
-    background-color:var(--body-bg);
+    /* background-color:var(--body-bg); */
+    background-color: yellow;
 }
 
 aside{
@@ -382,9 +383,10 @@ aside{
     position:absolute;
     right:0;
     width:81.8%;
-    height:100%;
+    height:190vh;
     background-color:var(--right-bg);
-    z-index:2;
+    /* background-color: yellow; */
+    /* z-index:2; */
 }
 
 nav{
@@ -822,4 +824,122 @@ td{
 
 .delete-btn i{
     font-size:1.1rem;
+}
+
+
+
+/* Transaction Card */
+
+
+.transaction-modal{
+    position:fixed;
+    inset:0;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    background:rgba(0,0,0,.45);
+    z-index:999;
+}
+
+.transaction-card{
+    width:460px;
+    background:var(--card-bg);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:1.4rem;
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:1.4rem;
+}
+
+.modal-header h2{
+    color:var(--heading);
+    font-size:1.7rem;
+    font-weight:700;
+}
+
+#close-modal{
+    background:none;
+    border:none;
+    color:var(--muted);
+    font-size:1.7rem;
+    cursor:pointer;
+    transition:.3s;
+}
+
+#close-modal:hover{
+    color:var(--expense-text);
+}
+
+#transaction-form{
+    display:flex;
+    flex-direction:column;
+    gap:1rem;
+}
+
+.input-box{
+    display:flex;
+    flex-direction:column;
+    gap:.45rem;
+}
+
+.input-box label{
+    color:var(--heading);
+    font-size:.95rem;
+    font-weight:600;
+}
+
+.input-box input,
+.input-box select{
+    width:100%;
+    height:44px;
+    padding:0 .85rem;
+    background:var(--chart-bg);
+    border:1px solid var(--border);
+    border-radius:8px;
+    color:var(--heading);
+    font-size:.95rem;
+    outline:none;
+}
+
+.input-box input::placeholder{
+    color:var(--placeholder);
+}
+
+.input-box input:focus,
+.input-box select:focus{
+    border-color:var(--primary);
+}
+
+.row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1rem;
+}
+
+.submit-btn{
+    width:100%;
+    height:46px;
+    margin-top:.3rem;
+    border:none;
+    border-radius:8px;
+    background:var(--primary);
+    color:#fff;
+    font-size:.95rem;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.submit-btn:hover{
+    background:var(--primary-hover);
+}
+
+.input-box select option{
+    background:var(--chart-bg);
+    color:var(--heading);
 }

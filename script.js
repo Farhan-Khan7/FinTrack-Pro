@@ -48,6 +48,7 @@ const signupForm = document.querySelector("#signup-form");
 const loginForm = document.querySelector("#login-form");
 
 
+
 registerBtn.addEventListener("click", function (event) {
     event.preventDefault()
     signupUsernameError.textContent = "";
@@ -69,20 +70,21 @@ registerBtn.addEventListener("click", function (event) {
         signupPasswordError.textContent = "Password is required.";
         return;
     } else {
+
         const userDetails = {
             username,
             password
         }
-
         localStorage.setItem("registerDetails", JSON.stringify(userDetails));
+        
         signupPage.style.display = "none"
         loginPage.style.display = "initial"
         localStorage.setItem("page", "login");
-
+        
     }
-
+    
     signupForm.reset();
-
+    
 })
 
 
@@ -95,11 +97,13 @@ loginBtn.addEventListener("click", function (event) {
     loginPasswordError.textContent = "";
     loginUsernameError.style.opacity = "0";
     loginPasswordError.style.opacity = "0";
-
+    
     const username = loginUsername.value.trim();
     const password = loginPassword.value.trim();
-
+    
     const userDetails = JSON.parse(localStorage.getItem("registerDetails"))
+    
+    
 
     if (username !== userDetails.username) {
         loginUsernameError.textContent = "Username is invalid.";
@@ -107,7 +111,7 @@ loginBtn.addEventListener("click", function (event) {
     } else if (password !== userDetails.password) {
         loginPasswordError.textContent = "Password is invalid.";
         loginPasswordError.style.opacity = "1";
-    }else{
+    } else {
         authContainer.style.display = "none"
         localStorage.setItem("isLoggedIn", "true");
     }
@@ -118,7 +122,7 @@ loginBtn.addEventListener("click", function (event) {
 
 const logoutBtn = document.querySelector("#logout")
 
-logoutBtn.addEventListener("click", function(event){
+logoutBtn.addEventListener("click", function (event) {
     event.preventDefault();
     signupPage.style.display = "none"
     authContainer.style.display = "flex"
@@ -132,18 +136,18 @@ const showLogin = document.querySelector("#show-login");
 const showSignup = document.querySelector("#show-signup");
 
 
-showLogin.addEventListener("click" , function(){
+showLogin.addEventListener("click", function () {
     loginPage.style.display = "initial";
     signupPage.style.display = "none";
 
-    localStorage.setItem("page" , "login")
+    localStorage.setItem("page", "login")
 })
 
-showSignup.addEventListener("click" , function(){
+showSignup.addEventListener("click", function () {
     loginPage.style.display = "none";
     signupPage.style.display = "initial"
 
-    localStorage.setItem("page" , "signup")
+    localStorage.setItem("page", "signup")
 })
 
 const isLoggedIn = localStorage.getItem("isLoggedIn");
@@ -154,14 +158,196 @@ if (isLoggedIn === "true") {
 
 const currentPage = localStorage.getItem("page");
 
-if (currentPage === "signup") {
-
-    signupPage.style.display = "block";
-    loginPage.style.display = "none";
-
-} else {
+if (currentPage === "login") {
 
     signupPage.style.display = "none";
     loginPage.style.display = "block";
 
+} else {
+
+    signupPage.style.display = "block";
+    loginPage.style.display = "none";
+
 }
+
+const profileName = document.querySelector(".user-name");
+
+const userDetails = JSON.parse(localStorage.getItem("registerDetails"));
+
+if (userDetails) {
+    profileName.textContent = userDetails.username;
+}
+
+// Add Transactin Btn
+
+const addTransaction = document.querySelector("#add-transaction")
+const transactionModel = document.querySelector(".transaction-modal")
+const closetransactionForm = document.querySelector("#close-modal")
+
+
+addTransaction.addEventListener("click", function () {
+    transactionModel.style.display = "flex";
+})
+
+closetransactionForm.addEventListener("click", function () {
+    transactionModel.style.display = "none"
+})
+
+// Chart Import
+
+const ctx = document.querySelector("#myChart");
+const chart = new Chart(ctx, {
+    type: "bar",
+
+    data: {
+
+        labels: ["Income", "Expense"],
+
+        datasets: [{
+            label: "Amount",
+
+            data: [0,0],
+
+            backgroundColor:[
+                "#22C55E",
+                "#EF4444"
+            ],
+
+            borderRadius:8,
+            borderWidth:0,
+            barThickness:150
+        }]
+    },
+
+    options:{
+
+        responsive:true,
+
+        maintainAspectRatio:false,
+
+        plugins:{
+            legend:{
+                display:false
+            },
+            title:{
+                display:true,
+                text:"Income vs Expense"
+            }
+        },
+
+        scales:{
+
+            x:{
+                grid:{
+                    display:false
+                }
+            },
+
+            y:{
+                beginAtZero:true,
+
+                ticks:{
+                    stepSize:100
+                }
+            }
+        }
+
+    }
+
+});
+const Balance = document.querySelector(".currentBalance");
+const Income = document.querySelector(".totalIncome");
+const Expenses = document.querySelector(".totalExpenses");
+const transactionCount = document.querySelector(".transactionCount")
+
+function updateDashboard(){
+
+    const transactions =
+    JSON.parse(localStorage.getItem("transactionDetails")) || [];
+
+    let totalIncome = 0;
+    let totalExpense = 0;
+
+    transactions.forEach(transaction=>{
+
+        if(transaction.transactionTag === "Income"){
+
+            totalIncome += Number(transaction.transactionamount);
+
+        }else{
+
+            totalExpense += Number(transaction.transactionamount);
+
+        }
+
+    });
+
+    const balance = totalIncome-totalExpense;
+
+    Income.textContent = totalIncome;
+
+    Expenses.textContent = totalExpense;
+
+    Balance.textContent = balance;
+
+    chart.data.datasets[0].data = [
+        totalIncome,
+        totalExpense
+    ];
+
+    const max = Math.max(totalIncome,totalExpense);
+
+    chart.options.scales.y.suggestedMax =
+    max+100;
+
+    chart.options.scales.y.ticks.stepSize =
+    Math.ceil((max+100)/10);
+
+    chart.update();
+
+}
+updateDashboard()
+
+
+const transactionForm = document.querySelector("#transaction-form");
+const transactionSubmitBtn = document.querySelector(".submit-btn");
+
+const transactionType = document.querySelector("#type");
+const description = document.querySelector("#description");
+const amount = document.querySelector("#amount");
+const date = document.querySelector("#date");
+const transactionCategories = document.querySelector("#category");
+
+
+
+
+
+
+transactionSubmitBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    const transactionTag = transactionType.value;
+    const transactiondesc = description.value;
+    const transactionamount = amount.value;
+    const transactiondate = date.value;
+    const transactionCategory = transactionCategories.value;
+
+    const transactionDetails = {
+        transactionTag,
+        transactiondesc,
+        transactionamount,
+        transactiondate,
+        transactionCategory
+    }
+
+    const transactions = JSON.parse(localStorage.getItem("transactionDetails")) || [];
+
+    transactions.push(transactionDetails);
+
+    localStorage.setItem("transactionDetails", JSON.stringify(transactions));
+
+    updateDashboard()
+    transactionModel.style.display = "none"
+})
+
+updateDashboard()
