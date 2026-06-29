@@ -131,8 +131,6 @@
         </div>
       </aside>
 
-      <!-- sidebar done  -->
-
       <div class="right-layout">
         <nav>
           <p class="user-name"></p>
@@ -156,7 +154,7 @@
               <div class="card-info">
                 <p class="cards-tag">Current Balance</p>
                 <h2 class="amount">
-                  <span class="currency">$</span
+                  <span class="currency changeCurrency">$</span
                   ><span class="currentBalance">0.00</span>
                 </h2>
               </div>
@@ -169,7 +167,7 @@
               <div class="card-info">
                 <p class="cards-tag">Total Income</p>
                 <h2 class="amount">
-                  <span class="currency">$</span
+                  <span class="currency changeCurrency">$</span
                   ><span class="totalIncome">0.00</span>
                 </h2>
               </div>
@@ -184,7 +182,7 @@
               <div class="card-info">
                 <p class="cards-tag">Total Expense</p>
                 <h2 class="amount">
-                  <span class="currency">$</span
+                  <span class="currency changeCurrency">$</span
                   ><span class="totalExpenses">0.00</span>
                 </h2>
               </div>
@@ -231,7 +229,11 @@
             <div class="transaction-controls">
               <div class="search-box">
                 <i class="ri-search-line"></i>
-                <input type="text" placeholder="Search transactions..." />
+                <input
+                  type="text"
+                  id="search"
+                  placeholder="Search transactions..."
+                />
               </div>
 
               <select id="filter">
@@ -253,29 +255,50 @@
                   </tr>
                 </thead>
 
-                <tbody id="transaction-list">
-                    <tr>
-                    <td>28 Jun 2026</td>
-
-                    <td>Salary</td>
-
-                    <td>
-                      <span class="category salary"> Salary </span>
-                    </td>
-
-                    <td class="income">+$1500.00</td>
-
-                    <td>
-                      <div class="actions">
-                        <i class="ri-pencil-ai-line edit"></i>
-                        <i class="ri-delete-bin-6-line delete"></i>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
+                <tbody id="transaction-list"></tbody>
               </table>
             </div>
           </section>
+        </div>
+
+        <div class="settings-page">
+          <div class="settings-heading">
+            <h1>Settings</h1>
+            <p>Manage your account profile and app formatting.</p>
+          </div>
+
+          <div class="settings-card">
+            <h2>Profile Details</h2>
+
+            <form id="settings-form">
+              <div class="settings-row">
+                <div class="setting-input">
+                  <label>Full Name</label>
+
+                  <input
+                    type="text"
+                    id="full-name"
+                    placeholder="Enter your name"
+                  />
+                </div>
+
+                <div class="setting-input">
+                  <label>Primary Currency</label>
+
+                  <select id="currency">
+                    <option value="$">USD ($)</option>
+                    <option value="€">EUR (€)</option>
+                    <option value="£">GBP (£)</option>
+                    <option value="₹">INR (₹)</option>
+                    <option value="¥">JPY (¥)</option>
+                  </select>
+                </div>
+              </div>
+
+              <button type="submit" id="save-settings">Save Changes</button>
+              <!-- <span class="successful-changes">Changes Successfull</span> -->
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -345,6 +368,8 @@
         </form>
       </div>
     </div>
+
+    <div class="toast" id="toast">Changes saved successfully!</div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
