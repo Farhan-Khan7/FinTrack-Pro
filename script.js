@@ -2,7 +2,6 @@ const toast = document.querySelector("#toast");
 
 function showToast(message) {
   toast.textContent = message;
-
   toast.classList.add("show");
 
   setTimeout(function () {
@@ -31,8 +30,37 @@ toggle.addEventListener("change", () => {
   }
 });
 
-// Authentication code
+// --- USER DATA SYNC FUNCTION ---
+// Ye function Navbar aur Settings Form dono ko ek sath update karta hai
+function syncUserData() {
+  const profileName = document.querySelector(".user-name");
+  const fullNameInput = document.querySelector("#full-name");
+  const currencyInput = document.querySelector("#currency");
 
+  const registeredUser = JSON.parse(localStorage.getItem("registerDetails"));
+  const savedSettings = JSON.parse(localStorage.getItem("settings"));
+
+  // Agar settings me koi naam save kiya gaya hai
+  if (savedSettings && savedSettings.name) {
+    if (profileName) profileName.textContent = savedSettings.name;
+    if (fullNameInput) fullNameInput.value = savedSettings.name;
+    if (currencyInput) currencyInput.value = savedSettings.currency;
+
+    // Sabhi jagah currency symbol update karo
+    const currencies = document.querySelectorAll(".changeCurrency");
+    currencies.forEach(function (c) {
+      c.textContent = savedSettings.currency;
+    });
+  } 
+  // Agar settings nahi hai, toh register kiya hua naam use karo
+  else if (registeredUser && registeredUser.username) {
+    if (profileName) profileName.textContent = registeredUser.username;
+    if (fullNameInput) fullNameInput.value = registeredUser.username;
+    if (currencyInput) currencyInput.value = "$";
+  }
+}
+
+// Authentication code
 const authContainer = document.querySelector(".auth-container");
 
 const signupUsername = document.querySelector("#signup-username");
@@ -110,7 +138,9 @@ loginBtn.addEventListener("click", function (event) {
   } else {
     authContainer.style.display = "none";
     localStorage.setItem("isLoggedIn", "true");
-    profileName.textContent = userDetails.username;
+    
+    // Login hote hi Navbar aur Settings form update karo
+    syncUserData(); 
   }
 
   loginForm.reset();
@@ -135,14 +165,12 @@ const showSignup = document.querySelector("#show-signup");
 showLogin.addEventListener("click", function () {
   loginPage.style.display = "initial";
   signupPage.style.display = "none";
-
   localStorage.setItem("page", "login");
 });
 
 showSignup.addEventListener("click", function () {
   loginPage.style.display = "none";
   signupPage.style.display = "initial";
-
   localStorage.setItem("page", "signup");
 });
 
@@ -162,16 +190,7 @@ if (currentPage === "login") {
   loginPage.style.display = "none";
 }
 
-const profileName = document.querySelector(".user-name");
-
-const userDetails = JSON.parse(localStorage.getItem("registerDetails"));
-
-if (userDetails) {
-  profileName.textContent = userDetails.username;
-}
-
-// Add Transactin Btn
-
+// Add Transaction Btn
 const addTransaction = document.querySelector("#add-transaction");
 const transactionModel = document.querySelector(".transaction-modal");
 const closetransactionForm = document.querySelector("#close-modal");
@@ -185,61 +204,39 @@ closetransactionForm.addEventListener("click", function () {
 });
 
 // Chart Import
-
 const ctx = document.querySelector("#myChart");
 const chart = new Chart(ctx, {
   type: "bar",
-
   data: {
     labels: ["Income", "Expense"],
-
     datasets: [
       {
         label: "Amount",
-
         data: [0, 0],
-
         backgroundColor: ["#22C55E", "#EF4444"],
-
         borderRadius: 8,
         borderWidth: 0,
         barThickness: 150,
       },
     ],
   },
-
   options: {
     responsive: true,
-
     maintainAspectRatio: false,
-
     plugins: {
-      legend: {
-        display: false,
-      },
-      title: {
-        display: true,
-        text: "Income vs Expense",
-      },
+      legend: { display: false },
+      title: { display: true, text: "Income vs Expense" },
     },
-
     scales: {
-      x: {
-        grid: {
-          display: false,
-        },
-      },
-
+      x: { grid: { display: false } },
       y: {
         beginAtZero: true,
-
-        ticks: {
-          stepSize: 100,
-        },
+        ticks: { stepSize: 100 },
       },
     },
   },
 });
+
 const Balance = document.querySelector(".currentBalance");
 const Income = document.querySelector(".totalIncome");
 const Expenses = document.querySelector(".totalExpenses");
@@ -260,27 +257,20 @@ function updateDashboard() {
     }
   });
 
-  // Total Transactions
   transactionCount.textContent = transactions.length;
   const balance = totalIncome - totalExpense;
 
   Income.textContent = totalIncome;
-
   Expenses.textContent = totalExpense;
-
   Balance.textContent = balance;
 
   chart.data.datasets[0].data = [totalIncome, totalExpense];
 
   const max = Math.max(totalIncome, totalExpense);
-
   chart.options.scales.y.suggestedMax = max + 100;
-
   chart.options.scales.y.ticks.stepSize = Math.ceil((max + 100) / 10);
-
   chart.update();
 }
-updateDashboard();
 
 const transactionForm = document.querySelector("#transaction-form");
 const transactionSubmitBtn = document.querySelector(".submit-btn");
@@ -295,6 +285,8 @@ const descriptionError = document.querySelector("#description-error");
 const amountError = document.querySelector("#amount-error");
 const dateError = document.querySelector("#date-error");
 const categoryError = document.querySelector("#category-error");
+
+let editIndex = -1;
 
 transactionSubmitBtn.addEventListener("click", function (event) {
   event.preventDefault();
@@ -320,25 +312,21 @@ transactionSubmitBtn.addEventListener("click", function (event) {
     descriptionError.style.opacity = "1";
     return;
   }
-
   if (transactionamount === "") {
     amountError.textContent = "Amount is required.";
     amountError.style.opacity = "1";
     return;
   }
-
   if (Number(transactionamount) <= 0) {
     amountError.textContent = "Amount must be greater than 0.";
     amountError.style.opacity = "1";
     return;
   }
-
   if (transactiondate === "") {
     dateError.textContent = "Date is required.";
     dateError.style.opacity = "1";
     return;
   }
-
   if (transactionCategory === "") {
     categoryError.textContent = "Please select a category.";
     categoryError.style.opacity = "1";
@@ -379,66 +367,45 @@ const transactionList = document.querySelector("#transaction-list");
 
 function renderTransactions(transactions) {
   transactionList.innerHTML = "";
-
   const settingsData = JSON.parse(localStorage.getItem("settings"));
-
   const currentCurrency = settingsData ? settingsData.currency : "$";
 
   transactions.forEach((transaction, index) => {
     transactionList.innerHTML += `
-
-            <tr>
-
-                <td>${transaction.transactiondate}</td>
-
-                <td>${transaction.transactiondesc}</td>
-
-                <td>
-                    <span class="category ${transaction.transactionCategory.toLowerCase()}">
-                        ${transaction.transactionCategory}
-                    </span>
-                </td>
-
+      <tr>
+          <td>${transaction.transactiondate}</td>
+          <td>${transaction.transactiondesc}</td>
+          <td>
+              <span class="category ${transaction.transactionCategory.toLowerCase()}">
+                  ${transaction.transactionCategory}
+              </span>
+          </td>
           <td class="${
             transaction.transactionTag === "Income" ? "income" : "expense"
           }">
-
-    ${transaction.transactionTag === "Income" ? "+" : "-"}
-
-    <span class="changeCurrency">${currentCurrency}</span>
-
-    ${transaction.transactionamount}
-
-</td>
-
-                <td>
-
-                    <div class="actions">
-
-                        <i class="ri-pencil-ai-line edit" data-index="${index}"></i>
-
-                        <i class="ri-delete-bin-6-line delete" data-index="${index}"></i>
-
-                    </div>
-
-                </td>
-
-            </tr>
-
-        `;
+              ${transaction.transactionTag === "Income" ? "+" : "-"}
+              <span class="changeCurrency">${currentCurrency}</span>
+              ${transaction.transactionamount}
+          </td>
+          <td>
+              <div class="actions">
+                  <i class="ri-pencil-ai-line edit" data-index="${index}"></i>
+                  <i class="ri-delete-bin-6-line delete" data-index="${index}"></i>
+              </div>
+          </td>
+      </tr>
+    `;
   });
 }
 
+// Initial renders
 updateDashboard();
-
-const transactions =
-  JSON.parse(localStorage.getItem("transactionDetails")) || [];
-
+const transactions = JSON.parse(localStorage.getItem("transactionDetails")) || [];
 renderTransactions(transactions);
 
+// Dashboard / Settings Navigation
 const dashboardBtn = document.querySelector("#dashboard-btn");
 const settingBtn = document.querySelector("#setting-btn");
-
 const dashboard = document.querySelector(".dashboard");
 const settings = document.querySelector(".settings-page");
 
@@ -460,41 +427,31 @@ settingBtn.addEventListener("click", function () {
   settings.style.display = "initial";
 });
 
-// filter Transactions
-
+// Filter Transactions
 const filter = document.querySelector("#filter");
-
 filter.addEventListener("change", function () {
   const filterValue = filter.value;
-
-  const transactions =
-    JSON.parse(localStorage.getItem("transactionDetails")) || [];
+  const transactions = JSON.parse(localStorage.getItem("transactionDetails")) || [];
 
   if (filterValue === "all") {
     renderTransactions(transactions);
   } else if (filterValue === "income") {
-    const incomeTransaction = transactions.filter(function (transaction) {
-      return transaction.transactionTag === "Income";
-    });
-
+    const incomeTransaction = transactions.filter(
+      (t) => t.transactionTag === "Income"
+    );
     renderTransactions(incomeTransaction);
   } else {
-    const expenseTransaction = transactions.filter(function (transaction) {
-      return transaction.transactionTag === "Expense";
-    });
-
+    const expenseTransaction = transactions.filter(
+      (t) => t.transactionTag === "Expense"
+    );
     renderTransactions(expenseTransaction);
   }
 });
 
-// delete Transaction
-
-const deleteBtns = document.querySelectorAll(".delete");
-
+// Delete Transaction
 transactionList.addEventListener("click", function (e) {
   if (e.target.classList.contains("delete")) {
     const index = e.target.dataset.index;
-
     const transactions =
       JSON.parse(localStorage.getItem("transactionDetails")) || [];
 
@@ -502,26 +459,20 @@ transactionList.addEventListener("click", function (e) {
     showToast("Transaction deleted successfully!");
 
     localStorage.setItem("transactionDetails", JSON.stringify(transactions));
-
     renderTransactions(transactions);
     updateDashboard();
   }
 });
 
-// edit transactions
-
-let editIndex = -1;
-
+// Edit transactions
 transactionList.addEventListener("click", function (e) {
   if (!e.target.classList.contains("edit")) return;
 
   const index = Number(e.target.dataset.index);
-
   editIndex = index;
 
   const transactions =
     JSON.parse(localStorage.getItem("transactionDetails")) || [];
-
   const transaction = transactions[index];
 
   transactionType.value = transaction.transactionTag;
@@ -531,116 +482,62 @@ transactionList.addEventListener("click", function (e) {
   transactionCategories.value = transaction.transactionCategory;
 
   transactionSubmitBtn.textContent = "Save Transaction";
-
   transactionModel.style.display = "flex";
 });
 
-// search transactions
-
+// Search transactions
 const searchInput = document.querySelector("#search");
-
 searchInput.addEventListener("input", function () {
   const searchValue = searchInput.value.toLowerCase();
-
   const transactions =
     JSON.parse(localStorage.getItem("transactionDetails")) || [];
 
   const searchTransaction = transactions.filter(function (transaction) {
     return transaction.transactiondesc.toLowerCase().includes(searchValue);
   });
-
   renderTransactions(searchTransaction);
 });
 
-// settings
-
-const fullName = document.querySelector("#full-name");
-const currency = document.querySelector("#currency");
-
-function updateSettings() {
-  const settingsData = JSON.parse(localStorage.getItem("settings"));
-
-  if (!settingsData) return;
-
-  // Navbar name
-  profileName.textContent = settingsData.name;
-
-  // Currency
-  const currencies = document.querySelectorAll(".changeCurrency");
-
-  currencies.forEach(function (currency) {
-    currency.textContent = settingsData.currency;
-  });
-}
-updateSettings();
-
-const settingsData = JSON.parse(localStorage.getItem("settings"));
-
-if (settingsData) {
-  fullName.value = settingsData.name;
-  currency.value = settingsData.currency;
-} 
-  const user = JSON.parse(localStorage.getItem("registerDetails"));
-
-if (!settingsData) {
-  const user = JSON.parse(localStorage.getItem("registerDetails"));
-
-  if (user) {
-    fullName.value = user.username;
-    currency.value = "$";
-  }
-}
-
+// Settings Form Logic
 const settingsForm = document.querySelector("#settings-form");
 settingsForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
+  const fullNameInput = document.querySelector("#full-name");
+  const currencyInput = document.querySelector("#currency");
+
   const settingsData = {
-    name: fullName.value.trim(),
-    currency: currency.value,
+    name: fullNameInput.value.trim(),
+    currency: currencyInput.value,
   };
 
-  // Save settings
   localStorage.setItem("settings", JSON.stringify(settingsData));
-
-  // Update registerDetails bhi
-  const user = JSON.parse(localStorage.getItem("registerDetails"));
-
-  if (user) {
-    user.username = fullName.value.trim();
-    localStorage.setItem("registerDetails", JSON.stringify(user));
-  }
-
-  updateSettings();
+  
+  // Settings save hote hi Navbar aur forms me data update karo
+  syncUserData();
 
   const transactions =
     JSON.parse(localStorage.getItem("transactionDetails")) || [];
-
   renderTransactions(transactions);
-
   showToast("Changes saved successfully!");
 });
 
-// reset buttons
-
+// Reset buttons
 const resetBtn = document.querySelector("#reset");
-
 resetBtn.addEventListener("click", function () {
   const confirmReset = confirm(
-    "Are you sure you want to delete all transactions?",
+    "Are you sure you want to delete all transactions?"
   );
 
   if (!confirmReset) return;
 
   localStorage.removeItem("transactionDetails");
-
   updateDashboard();
-
   renderTransactions([]);
-
   searchInput.value = "";
-
   filter.value = "all";
-
   showToast("All transactions deleted successfully!");
 });
+
+// Page Load Hote hi data synchronize karo
+syncUserData();
