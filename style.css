@@ -41,53 +41,53 @@
 
     --shopping-bg:#F3E8FF;
     --shopping:#7E22CE;
-
+    
     --food-bg:#FEF3C7;
     --food:#B45309;
 
     --table-heading:#64748B;
     --table-border:#E5E7EB;
-
+    
     --placeholder:#94A3B8;
-
+    
     --reset-hover:#FECACA;
 
     --danger:#EF4444;
 }
 .dark{
-
+    
     --body-bg:#111827;
     --right-bg:#111827;
     --sidebar-bg:#1F2937;
     --navbar-bg:#1F2937;
     --card-bg:#1F2937;
     --chart-bg:#111827;
-
+    
     --heading:#F9FAFB;
     --text:#E5E7EB;
     --muted:#9CA3AF;
     --nav-text:#CBD5E1;
-
+    
     --border:#374151;
     --border-light:#4B5563;
     --border-strong:#374151;
     --divider:#374151;
-
+    
     --primary:#3B82F6;
     --primary-hover:#2563EB;
-
+    
     --hover-bg:#374151;
     --table-hover:#273244;
-
+    
     --icon-bg:#374151;
     --icon:#60A5FA;
-
+    
     --slider-bg:#4B5563;
-
+    
     --income-bg:#DCFCE7;
     --income:#166534;
     --income-text:#16A34A;
-
+    
     --expense-bg:#FEE2E2;
     --expense:#B91C1C;
     --expense-text:#DC2626;
@@ -105,9 +105,9 @@
     --table-border:#374151;
 
     --placeholder:#6B7280;
-
+    
     --reset-hover:#FECACA;
-
+    
     --danger:#EF4444;
 }
 *{
@@ -123,6 +123,32 @@ body{
     overflow-x: hidden;
     background-color: var(--body-bg);
 }
+/* toast notification */
+
+.toast{
+    position:fixed;
+    top:25px;
+    right:25px;
+    padding:.9rem 1.3rem;
+    background:#22C55E;
+    color:#fff;
+    border-radius:10px;
+    font-size:.95rem;
+    font-weight:600;
+    box-shadow:0 8px 25px rgba(0,0,0,.2);
+    opacity:0;
+    pointer-events:none;
+    transform:translateY(-20px);
+    transition:.3s;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* authentication */
+
 .auth-container{
     position:fixed;
     width:100%;
@@ -961,6 +987,16 @@ td{
     background:var(--chart-bg);
     color:var(--heading);
 }
+.error{
+    display:block;
+    min-height:18px;
+    margin-top:.35rem;
+    color:var(--expense-text);
+    font-size:.82rem;
+    font-weight:500;
+    opacity:0;
+    transition:.25s;
+}
 
 /* sidebar button changes dashboard */
 
@@ -1064,27 +1100,3 @@ td{
 
 }
 
-
-/* toast notification */
-
-.toast{
-    position:fixed;
-    top:25px;
-    right:25px;
-    padding:.9rem 1.3rem;
-    background:#22C55E;
-    color:#fff;
-    border-radius:10px;
-    font-size:.95rem;
-    font-weight:600;
-    box-shadow:0 8px 25px rgba(0,0,0,.2);
-    opacity:0;
-    pointer-events:none;
-    transform:translateY(-20px);
-    transition:.3s;
-}
-
-.toast.show{
-    opacity:1;
-    transform:translateY(0);
-}

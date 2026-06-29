@@ -1,13 +1,13 @@
 const toast = document.querySelector("#toast");
 
 function showToast(message) {
-  toast.textContent = message;
+    toast.textContent = message;
 
-  toast.classList.add("show");
+    toast.classList.add("show");
 
-  setTimeout(function () {
-    toast.classList.remove("show");
-  }, 2000);
+    setTimeout(function () {
+        toast.classList.remove("show");
+    }, 2000);
 }
 
 const toggle = document.querySelector("#darkMode");
@@ -16,19 +16,19 @@ const toggle = document.querySelector("#darkMode");
 const currentTheme = localStorage.getItem("theme");
 
 if (currentTheme === "dark") {
-  document.body.classList.add("dark");
-  toggle.checked = true;
+    document.body.classList.add("dark");
+    toggle.checked = true;
 }
 
 // Toggle change hone par
 toggle.addEventListener("change", () => {
-  if (toggle.checked) {
-    document.body.classList.add("dark");
-    localStorage.setItem("theme", "dark");
-  } else {
-    document.body.classList.remove("dark");
-    localStorage.setItem("theme", "light");
-  }
+    if (toggle.checked) {
+        document.body.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+    } else {
+        document.body.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+    }
 });
 
 // Authentication code
@@ -53,113 +53,113 @@ const signupForm = document.querySelector("#signup-form");
 const loginForm = document.querySelector("#login-form");
 
 registerBtn.addEventListener("click", function (event) {
-  event.preventDefault();
-  signupUsernameError.textContent = "";
-  signupPasswordError.textContent = "";
-  signupUsernameError.style.opacity = "0";
-  signupPasswordError.style.opacity = "0";
+    event.preventDefault();
+    signupUsernameError.textContent = "";
+    signupPasswordError.textContent = "";
+    signupUsernameError.style.opacity = "0";
+    signupPasswordError.style.opacity = "0";
 
-  const username = signupUsername.value.trim();
-  const password = signupPassword.value.trim();
+    const username = signupUsername.value.trim();
+    const password = signupPassword.value.trim();
 
-  if (username === "") {
-    signupUsernameError.style.opacity = "1";
-    signupUsernameError.textContent = "Username is required.";
-    return;
-  } else if (password === "") {
-    signupPasswordError.style.opacity = "1";
-    signupPasswordError.textContent = "Password is required.";
-    return;
-  } else {
-    const userDetails = {
-      username,
-      password,
-    };
-    localStorage.setItem("registerDetails", JSON.stringify(userDetails));
+    if (username === "") {
+        signupUsernameError.style.opacity = "1";
+        signupUsernameError.textContent = "Username is required.";
+        return;
+    } else if (password === "") {
+        signupPasswordError.style.opacity = "1";
+        signupPasswordError.textContent = "Password is required.";
+        return;
+    } else {
+        const userDetails = {
+            username,
+            password,
+        };
+        localStorage.setItem("registerDetails", JSON.stringify(userDetails));
 
-    signupPage.style.display = "none";
-    loginPage.style.display = "initial";
-    localStorage.setItem("page", "login");
-  }
+        signupPage.style.display = "none";
+        loginPage.style.display = "initial";
+        localStorage.setItem("page", "login");
+    }
 
-  signupForm.reset();
-  showToast("Account created successfully!");
+    signupForm.reset();
+    showToast("Account created successfully!");
 });
 
 const loginUsernameError = document.querySelector("#login-username-error");
 const loginPasswordError = document.querySelector("#login-password-error");
 
 loginBtn.addEventListener("click", function (event) {
-  event.preventDefault();
-  loginUsernameError.textContent = "";
-  loginPasswordError.textContent = "";
-  loginUsernameError.style.opacity = "0";
-  loginPasswordError.style.opacity = "0";
+    event.preventDefault();
+    loginUsernameError.textContent = "";
+    loginPasswordError.textContent = "";
+    loginUsernameError.style.opacity = "0";
+    loginPasswordError.style.opacity = "0";
 
-  const username = loginUsername.value.trim();
-  const password = loginPassword.value.trim();
+    const username = loginUsername.value.trim();
+    const password = loginPassword.value.trim();
 
-  const userDetails = JSON.parse(localStorage.getItem("registerDetails"));
+    const userDetails = JSON.parse(localStorage.getItem("registerDetails"));
 
-  if (username !== userDetails.username) {
-    loginUsernameError.textContent = "Username is invalid.";
-    loginUsernameError.style.opacity = "1";
-  } else if (password !== userDetails.password) {
-    loginPasswordError.textContent = "Password is invalid.";
-    loginPasswordError.style.opacity = "1";
-  } else {
-      authContainer.style.display = "none";
-    localStorage.setItem("isLoggedIn", "true");
-    profileName.textContent = userDetails.username;
-  }
+    if (username !== userDetails.username) {
+        loginUsernameError.textContent = "Username is invalid.";
+        loginUsernameError.style.opacity = "1";
+    } else if (password !== userDetails.password) {
+        loginPasswordError.textContent = "Password is invalid.";
+        loginPasswordError.style.opacity = "1";
+    } else {
+        authContainer.style.display = "none";
+        localStorage.setItem("isLoggedIn", "true");
+        profileName.textContent = userDetails.username;
+    }
 
-  loginForm.reset();
-  showToast("Welcome back!");
+    loginForm.reset();
+    showToast("Welcome back!");
 });
 
 const logoutBtn = document.querySelector("#logout");
 
 logoutBtn.addEventListener("click", function (event) {
-  event.preventDefault();
-  signupPage.style.display = "none";
-  authContainer.style.display = "flex";
+    event.preventDefault();
+    signupPage.style.display = "none";
+    authContainer.style.display = "flex";
 
-  localStorage.setItem("page", "login");
-  localStorage.setItem("isLoggedIn", "false");
-  showToast("Logged out successfully!");
+    localStorage.setItem("page", "login");
+    localStorage.setItem("isLoggedIn", "false");
+    showToast("Logged out successfully!");
 });
 
 const showLogin = document.querySelector("#show-login");
 const showSignup = document.querySelector("#show-signup");
 
 showLogin.addEventListener("click", function () {
-  loginPage.style.display = "initial";
-  signupPage.style.display = "none";
+    loginPage.style.display = "initial";
+    signupPage.style.display = "none";
 
-  localStorage.setItem("page", "login");
+    localStorage.setItem("page", "login");
 });
 
 showSignup.addEventListener("click", function () {
-  loginPage.style.display = "none";
-  signupPage.style.display = "initial";
+    loginPage.style.display = "none";
+    signupPage.style.display = "initial";
 
-  localStorage.setItem("page", "signup");
+    localStorage.setItem("page", "signup");
 });
 
 const isLoggedIn = localStorage.getItem("isLoggedIn");
 
 if (isLoggedIn === "true") {
-  authContainer.style.display = "none";
+    authContainer.style.display = "none";
 }
 
 const currentPage = localStorage.getItem("page");
 
 if (currentPage === "login") {
-  signupPage.style.display = "none";
-  loginPage.style.display = "block";
+    signupPage.style.display = "none";
+    loginPage.style.display = "block";
 } else {
-  signupPage.style.display = "block";
-  loginPage.style.display = "none";
+    signupPage.style.display = "block";
+    loginPage.style.display = "none";
 }
 
 const profileName = document.querySelector(".user-name");
@@ -167,7 +167,7 @@ const profileName = document.querySelector(".user-name");
 const userDetails = JSON.parse(localStorage.getItem("registerDetails"));
 
 if (userDetails) {
-  profileName.textContent = userDetails.username;
+    profileName.textContent = userDetails.username;
 }
 
 // Add Transactin Btn
@@ -177,68 +177,68 @@ const transactionModel = document.querySelector(".transaction-modal");
 const closetransactionForm = document.querySelector("#close-modal");
 
 addTransaction.addEventListener("click", function () {
-  transactionModel.style.display = "flex";
+    transactionModel.style.display = "flex";
 });
 
 closetransactionForm.addEventListener("click", function () {
-  transactionModel.style.display = "none";
+    transactionModel.style.display = "none";
 });
 
 // Chart Import
 
 const ctx = document.querySelector("#myChart");
 const chart = new Chart(ctx, {
-  type: "bar",
+    type: "bar",
 
-  data: {
-    labels: ["Income", "Expense"],
+    data: {
+        labels: ["Income", "Expense"],
 
-    datasets: [
-      {
-        label: "Amount",
+        datasets: [
+            {
+                label: "Amount",
 
-        data: [0, 0],
+                data: [0, 0],
 
-        backgroundColor: ["#22C55E", "#EF4444"],
+                backgroundColor: ["#22C55E", "#EF4444"],
 
-        borderRadius: 8,
-        borderWidth: 0,
-        barThickness: 150,
-      },
-    ],
-  },
-
-  options: {
-    responsive: true,
-
-    maintainAspectRatio: false,
-
-    plugins: {
-      legend: {
-        display: false,
-      },
-      title: {
-        display: true,
-        text: "Income vs Expense",
-      },
+                borderRadius: 8,
+                borderWidth: 0,
+                barThickness: 150,
+            },
+        ],
     },
 
-    scales: {
-      x: {
-        grid: {
-          display: false,
-        },
-      },
+    options: {
+        responsive: true,
 
-      y: {
-        beginAtZero: true,
+        maintainAspectRatio: false,
 
-        ticks: {
-          stepSize: 100,
+        plugins: {
+            legend: {
+                display: false,
+            },
+            title: {
+                display: true,
+                text: "Income vs Expense",
+            },
         },
-      },
+
+        scales: {
+            x: {
+                grid: {
+                    display: false,
+                },
+            },
+
+            y: {
+                beginAtZero: true,
+
+                ticks: {
+                    stepSize: 100,
+                },
+            },
+        },
     },
-  },
 });
 const Balance = document.querySelector(".currentBalance");
 const Income = document.querySelector(".totalIncome");
@@ -246,39 +246,39 @@ const Expenses = document.querySelector(".totalExpenses");
 const transactionCount = document.querySelector(".transactionCount");
 
 function updateDashboard() {
-  const transactions =
-    JSON.parse(localStorage.getItem("transactionDetails")) || [];
+    const transactions =
+        JSON.parse(localStorage.getItem("transactionDetails")) || [];
 
-  let totalIncome = 0;
-  let totalExpense = 0;
+    let totalIncome = 0;
+    let totalExpense = 0;
 
-  transactions.forEach((transaction) => {
-    if (transaction.transactionTag === "Income") {
-      totalIncome += Number(transaction.transactionamount);
-    } else {
-      totalExpense += Number(transaction.transactionamount);
-    }
-  });
+    transactions.forEach((transaction) => {
+        if (transaction.transactionTag === "Income") {
+            totalIncome += Number(transaction.transactionamount);
+        } else {
+            totalExpense += Number(transaction.transactionamount);
+        }
+    });
 
-  // Total Transactions
-  transactionCount.textContent = transactions.length;
-  const balance = totalIncome - totalExpense;
+    // Total Transactions
+    transactionCount.textContent = transactions.length;
+    const balance = totalIncome - totalExpense;
 
-  Income.textContent = totalIncome;
+    Income.textContent = totalIncome;
 
-  Expenses.textContent = totalExpense;
+    Expenses.textContent = totalExpense;
 
-  Balance.textContent = balance;
+    Balance.textContent = balance;
 
-  chart.data.datasets[0].data = [totalIncome, totalExpense];
+    chart.data.datasets[0].data = [totalIncome, totalExpense];
 
-  const max = Math.max(totalIncome, totalExpense);
+    const max = Math.max(totalIncome, totalExpense);
 
-  chart.options.scales.y.suggestedMax = max + 100;
+    chart.options.scales.y.suggestedMax = max + 100;
 
-  chart.options.scales.y.ticks.stepSize = Math.ceil((max + 100) / 10);
+    chart.options.scales.y.ticks.stepSize = Math.ceil((max + 100) / 10);
 
-  chart.update();
+    chart.update();
 }
 updateDashboard();
 
@@ -291,56 +291,112 @@ const amount = document.querySelector("#amount");
 const date = document.querySelector("#date");
 const transactionCategories = document.querySelector("#category");
 
+
+const descriptionError = document.querySelector("#description-error");
+const amountError = document.querySelector("#amount-error");
+const dateError = document.querySelector("#date-error");
+const categoryError = document.querySelector("#category-error");
+
 transactionSubmitBtn.addEventListener("click", function (event) {
-  event.preventDefault();
+    event.preventDefault();
 
-  const transactionTag = transactionType.value;
-  const transactiondesc = description.value;
-  const transactionamount = amount.value;
-  const transactiondate = date.value;
-  const transactionCategory = transactionCategories.value;
+    descriptionError.textContent = "";
+    amountError.textContent = "";
+    dateError.textContent = "";
+    categoryError.textContent = "";
 
-  const transactionDetails = {
-    transactionTag,
-    transactiondesc,
-    transactionamount,
-    transactiondate,
-    transactionCategory,
-  };
+    descriptionError.style.opacity = "0";
+    amountError.style.opacity = "0";
+    dateError.style.opacity = "0";
+    categoryError.style.opacity = "0";
 
-  const transactions =
-    JSON.parse(localStorage.getItem("transactionDetails")) || [];
+    const transactionTag = transactionType.value;
+    const transactiondesc = description.value;
+    const transactionamount = amount.value;
+    const transactiondate = date.value;
+    const transactionCategory = transactionCategories.value;
 
-  if (editIndex === -1) {
-    transactions.push(transactionDetails);
-    showToast("Transaction added successfully!");
-  } else {
-    transactions[editIndex] = transactionDetails;
-    editIndex = -1;
-    showToast("Transaction updated successfully!");
-  }
+    if (transactiondesc === "") {
 
-  localStorage.setItem("transactionDetails", JSON.stringify(transactions));
+        descriptionError.textContent = "Description is required.";
+        descriptionError.style.opacity = "1";
+        return;
 
-  renderTransactions(transactions);
-  updateDashboard();
-  transactionModel.style.display = "none";
-  transactionSubmitBtn.textContent = "Add Transaction";
+    }
 
-  transactionForm.reset();
+    if (transactionamount === "") {
+
+        amountError.textContent = "Amount is required.";
+        amountError.style.opacity = "1";
+        return;
+
+    }
+
+    if (Number(transactionamount) <= 0) {
+
+        amountError.textContent = "Amount must be greater than 0.";
+        amountError.style.opacity = "1";
+        return;
+
+    }
+
+    if (transactiondate === "") {
+
+        dateError.textContent = "Date is required.";
+        dateError.style.opacity = "1";
+        return;
+
+    }
+
+    if (transactionCategory === "") {
+
+        categoryError.textContent = "Please select a category.";
+        categoryError.style.opacity = "1";
+        return;
+
+    }
+
+    const transactionDetails = {
+        transactionTag,
+        transactiondesc,
+        transactionamount,
+        transactiondate,
+        transactionCategory,
+    };
+
+    const transactions =
+        JSON.parse(localStorage.getItem("transactionDetails")) || [];
+
+    if (editIndex === -1) {
+        transactions.push(transactionDetails);
+        showToast("Transaction added successfully!");
+    } else {
+        transactions[editIndex] = transactionDetails;
+        editIndex = -1;
+        showToast("Transaction updated successfully!");
+    }
+
+    localStorage.setItem("transactionDetails", JSON.stringify(transactions));
+
+    renderTransactions(transactions);
+    updateDashboard();
+    transactionModel.style.display = "none";
+    transactionSubmitBtn.textContent = "Add Transaction";
+
+    transactionForm.reset();
 });
 
 const transactionList = document.querySelector("#transaction-list");
 
 function renderTransactions(transactions) {
-  transactionList.innerHTML = "";
+    transactionList.innerHTML = "";
 
-  const settingsData = JSON.parse(localStorage.getItem("settings"));
+    const settingsData = JSON.parse(localStorage.getItem("settings"));
 
-  const currentCurrency = settingsData ? settingsData.currency : "$";
+    const currentCurrency = settingsData ? settingsData.currency : "$";
 
-  transactions.forEach((transaction, index) => {
-    transactionList.innerHTML += `
+    transactions.forEach((transaction, index) => {
+        transactionList.innerHTML += `
 
             <tr>
 
@@ -354,9 +410,8 @@ function renderTransactions(transactions) {
                     </span>
                 </td>
 
-          <td class="${
-            transaction.transactionTag === "Income" ? "income" : "expense"
-          }">
+          <td class="${transaction.transactionTag === "Income" ? "income" : "expense"
+            }">
 
     ${transaction.transactionTag === "Income" ? "+" : "-"}
 
@@ -381,13 +436,13 @@ function renderTransactions(transactions) {
             </tr>
 
         `;
-  });
+    });
 }
 
 updateDashboard();
 
 const transactions =
-  JSON.parse(localStorage.getItem("transactionDetails")) || [];
+    JSON.parse(localStorage.getItem("transactionDetails")) || [];
 
 renderTransactions(transactions);
 
@@ -398,21 +453,21 @@ const dashboard = document.querySelector(".dashboard");
 const settings = document.querySelector(".settings-page");
 
 dashboardBtn.addEventListener("click", function () {
-  settingBtn.style.backgroundColor = "transparent";
-  settingBtn.style.color = "#b8c7db";
-  dashboardBtn.style.backgroundColor = "#e5e7eb19";
-  dashboardBtn.style.color = "#3B82F6";
-  dashboard.style.display = "initial";
-  settings.style.display = "none";
+    settingBtn.style.backgroundColor = "transparent";
+    settingBtn.style.color = "#b8c7db";
+    dashboardBtn.style.backgroundColor = "#e5e7eb19";
+    dashboardBtn.style.color = "#3B82F6";
+    dashboard.style.display = "initial";
+    settings.style.display = "none";
 });
 
 settingBtn.addEventListener("click", function () {
-  dashboardBtn.style.backgroundColor = "transparent";
-  dashboardBtn.style.color = "#b8c7db";
-  settingBtn.style.backgroundColor = "#e5e7eb19";
-  settingBtn.style.color = "#3B82F6";
-  dashboard.style.display = "none";
-  settings.style.display = "initial";
+    dashboardBtn.style.backgroundColor = "transparent";
+    dashboardBtn.style.color = "#b8c7db";
+    settingBtn.style.backgroundColor = "#e5e7eb19";
+    settingBtn.style.color = "#3B82F6";
+    dashboard.style.display = "none";
+    settings.style.display = "initial";
 });
 
 // filter Transactions
@@ -420,26 +475,26 @@ settingBtn.addEventListener("click", function () {
 const filter = document.querySelector("#filter");
 
 filter.addEventListener("change", function () {
-  const filterValue = filter.value;
+    const filterValue = filter.value;
 
-  const transactions =
-    JSON.parse(localStorage.getItem("transactionDetails")) || [];
+    const transactions =
+        JSON.parse(localStorage.getItem("transactionDetails")) || [];
 
-  if (filterValue === "all") {
-    renderTransactions(transactions);
-  } else if (filterValue === "income") {
-    const incomeTransaction = transactions.filter(function (transaction) {
-      return transaction.transactionTag === "Income";
-    });
+    if (filterValue === "all") {
+        renderTransactions(transactions);
+    } else if (filterValue === "income") {
+        const incomeTransaction = transactions.filter(function (transaction) {
+            return transaction.transactionTag === "Income";
+        });
 
-    renderTransactions(incomeTransaction);
-  } else {
-    const expenseTransaction = transactions.filter(function (transaction) {
-      return transaction.transactionTag === "Expense";
-    });
+        renderTransactions(incomeTransaction);
+    } else {
+        const expenseTransaction = transactions.filter(function (transaction) {
+            return transaction.transactionTag === "Expense";
+        });
 
-    renderTransactions(expenseTransaction);
-  }
+        renderTransactions(expenseTransaction);
+    }
 });
 
 // delete Transaction
@@ -447,20 +502,20 @@ filter.addEventListener("change", function () {
 const deleteBtns = document.querySelectorAll(".delete");
 
 transactionList.addEventListener("click", function (e) {
-  if (e.target.classList.contains("delete")) {
-    const index = e.target.dataset.index;
+    if (e.target.classList.contains("delete")) {
+        const index = e.target.dataset.index;
 
-    const transactions =
-      JSON.parse(localStorage.getItem("transactionDetails")) || [];
+        const transactions =
+            JSON.parse(localStorage.getItem("transactionDetails")) || [];
 
-    transactions.splice(index, 1);
-    showToast("Transaction deleted successfully!");
+        transactions.splice(index, 1);
+        showToast("Transaction deleted successfully!");
 
-    localStorage.setItem("transactionDetails", JSON.stringify(transactions));
+        localStorage.setItem("transactionDetails", JSON.stringify(transactions));
 
-    renderTransactions(transactions);
-    updateDashboard();
-  }
+        renderTransactions(transactions);
+        updateDashboard();
+    }
 });
 
 // edit transactions
@@ -468,26 +523,26 @@ transactionList.addEventListener("click", function (e) {
 let editIndex = -1;
 
 transactionList.addEventListener("click", function (e) {
-  if (!e.target.classList.contains("edit")) return;
+    if (!e.target.classList.contains("edit")) return;
 
-  const index = Number(e.target.dataset.index);
+    const index = Number(e.target.dataset.index);
 
-  editIndex = index;
+    editIndex = index;
 
-  const transactions =
-    JSON.parse(localStorage.getItem("transactionDetails")) || [];
+    const transactions =
+        JSON.parse(localStorage.getItem("transactionDetails")) || [];
 
-  const transaction = transactions[index];
+    const transaction = transactions[index];
 
-  transactionType.value = transaction.transactionTag;
-  description.value = transaction.transactiondesc;
-  amount.value = transaction.transactionamount;
-  date.value = transaction.transactiondate;
-  transactionCategories.value = transaction.transactionCategory;
+    transactionType.value = transaction.transactionTag;
+    description.value = transaction.transactiondesc;
+    amount.value = transaction.transactionamount;
+    date.value = transaction.transactiondate;
+    transactionCategories.value = transaction.transactionCategory;
 
-  transactionSubmitBtn.textContent = "Save Transaction";
+    transactionSubmitBtn.textContent = "Save Transaction";
 
-  transactionModel.style.display = "flex";
+    transactionModel.style.display = "flex";
 });
 
 // search transactions
@@ -495,16 +550,16 @@ transactionList.addEventListener("click", function (e) {
 const searchInput = document.querySelector("#search");
 
 searchInput.addEventListener("input", function () {
-  const searchValue = searchInput.value.toLowerCase();
+    const searchValue = searchInput.value.toLowerCase();
 
-  const transactions =
-    JSON.parse(localStorage.getItem("transactionDetails")) || [];
+    const transactions =
+        JSON.parse(localStorage.getItem("transactionDetails")) || [];
 
-  const searchTransaction = transactions.filter(function (transaction) {
-    return transaction.transactiondesc.toLowerCase().includes(searchValue);
-  });
+    const searchTransaction = transactions.filter(function (transaction) {
+        return transaction.transactiondesc.toLowerCase().includes(searchValue);
+    });
 
-  renderTransactions(searchTransaction);
+    renderTransactions(searchTransaction);
 });
 
 // settings
@@ -513,50 +568,50 @@ const fullName = document.querySelector("#full-name");
 const currency = document.querySelector("#currency");
 
 function updateSettings() {
-  const settingsData = JSON.parse(localStorage.getItem("settings"));
+    const settingsData = JSON.parse(localStorage.getItem("settings"));
 
-  if (!settingsData) return;
+    if (!settingsData) return;
 
-  // Navbar name
-  profileName.textContent = settingsData.name;
+    // Navbar name
+    profileName.textContent = settingsData.name;
 
-  // Currency
-  const currencies = document.querySelectorAll(".changeCurrency");
+    // Currency
+    const currencies = document.querySelectorAll(".changeCurrency");
 
-  currencies.forEach(function (currency) {
-    currency.textContent = settingsData.currency;
-  });
+    currencies.forEach(function (currency) {
+        currency.textContent = settingsData.currency;
+    });
 }
 updateSettings();
 
 const settingsData = JSON.parse(localStorage.getItem("settings"));
 
 if (settingsData) {
-  fullName.value = settingsData.name;
-  currency.value = settingsData.currency;
+    fullName.value = settingsData.name;
+    currency.value = settingsData.currency;
 } else {
-  const user = JSON.parse(localStorage.getItem("registerDetails"));
-  fullName.value = user.username;
-  currency.value = "$";
+    const user = JSON.parse(localStorage.getItem("registerDetails"));
+    fullName.value = user.username;
+    currency.value = "$";
 }
 
 const settingsForm = document.querySelector("#settings-form");
 settingsForm.addEventListener("submit", function (event) {
-  event.preventDefault();
+    event.preventDefault();
 
-  const settingsData = {
-    name: fullName.value.trim(),
-    currency: currency.value,
-  };
+    const settingsData = {
+        name: fullName.value.trim(),
+        currency: currency.value,
+    };
 
-  localStorage.setItem("settings", JSON.stringify(settingsData));
-  updateSettings();
+    localStorage.setItem("settings", JSON.stringify(settingsData));
+    updateSettings();
 
-  const transactions =
-    JSON.parse(localStorage.getItem("transactionDetails")) || [];
+    const transactions =
+        JSON.parse(localStorage.getItem("transactionDetails")) || [];
 
-  renderTransactions(transactions);
-  showToast("Changes saved successfully!");
+    renderTransactions(transactions);
+    showToast("Changes saved successfully!");
 });
 
 // reset buttons
@@ -564,21 +619,21 @@ settingsForm.addEventListener("submit", function (event) {
 const resetBtn = document.querySelector("#reset");
 
 resetBtn.addEventListener("click", function () {
-  const confirmReset = confirm(
-    "Are you sure you want to delete all transactions?",
-  );
+    const confirmReset = confirm(
+        "Are you sure you want to delete all transactions?",
+    );
 
-  if (!confirmReset) return;
+    if (!confirmReset) return;
 
-  localStorage.removeItem("transactionDetails");
+    localStorage.removeItem("transactionDetails");
 
-  updateDashboard();
+    updateDashboard();
 
-  renderTransactions([]);
+    renderTransactions([]);
 
-  searchInput.value = "";
+    searchInput.value = "";
 
-  filter.value = "all";
+    filter.value = "all";
 
-  showToast("All transactions deleted successfully!");
+    showToast("All transactions deleted successfully!");
 });
