@@ -1100,3 +1100,188 @@ td{
 
 }
 
+
+
+/* responsive */
+
+
+      /* Large Tablets & Small Desktops */
+      @media (max-width: 1024px) {
+        .dashboard-cards {
+          flex-wrap: wrap;
+      }
+          .dashboard-content {
+              flex-direction: column;
+          }
+          .dashboard-chart {
+              width: 100%;
+              margin-bottom: 1.5rem;
+          }
+          .dashboard-Preferences {
+              width: 100%;
+          }
+          .transactions {
+              width: 100%;
+          }
+          .cards {
+              width: 47%;
+              margin-bottom: 1rem;
+          }
+      }
+
+      /* Tablets */
+      @media (max-width: 768px) {
+          .layout {
+              flex-direction: column;
+          }
+          aside {
+              position: relative;
+              width: 100%;
+              border-right: none;
+              border-bottom: 1px solid var(--border);
+              z-index: 50;
+          }
+          .sidebar {
+              height: auto;
+              flex-direction: row;
+              padding: 1rem;
+              align-items: center;
+          }
+          .sidebar-top {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              gap: 1.5rem;
+              flex: 1;
+          }
+          .logo {
+              margin-bottom: 0;
+          }
+          .logo-name p {
+              display: none;
+          }
+          .sidebar-links {
+              flex-direction: row;
+              gap: 0.5rem;
+          }
+          .sidebar-links button span,
+          .sidebar-bottom button span {
+              display: none;
+          }
+          .sidebar-links button,
+          .sidebar-bottom button {
+              padding: 0.6rem;
+              width: auto;
+          }
+          .sidebar-bottom {
+              margin-left: 1rem;
+          }
+          .right-layout {
+              position: static;
+              width: 100%;
+              height: auto;
+          }
+          nav {
+              justify-content: flex-end;
+              padding: 1rem 1.5rem;
+          }
+          .transaction-controls {
+              grid-template-columns: 1fr;
+          }
+          .transaction-list {
+              overflow-x: auto;
+              -webkit-overflow-scrolling: touch;
+              width: 100%;
+          }
+          table {
+              min-width: 600px; /* Allows horizontal scrolling without squeezing table */
+          }
+          .transaction-list th, 
+          .transaction-list td {
+              white-space: nowrap; /* Forces horizontal scrolling */
+          }
+      }
+
+      /* Mobile Phones */
+      @media (max-width: 480px) {
+          .cards {
+              width: 100%;
+              padding: 1rem;
+              height: auto;
+              gap: 1rem;
+          }
+          .amount {
+              font-size: 1.25rem;
+          }
+          .cards-tag {
+              font-size: 0.9rem;
+          }
+          .auth-card,
+          .transaction-card {
+              width: 92%;
+              padding: 1.2rem;
+          }
+          .modal-header h2 {
+              font-size: 1.4rem;
+          }
+          .settings-row {
+              grid-template-columns: 1fr;
+          }
+          .row {
+              grid-template-columns: 1fr;
+          }
+          .sidebar-top {
+              gap: 0.5rem;
+          }
+          .logo i {
+              font-size: 1.35rem;
+          }
+          .logo-name h1 {
+              font-size: 1rem;
+          }
+          .dashboard-heading h1 {
+              font-size: 1.35rem;
+          }
+          .dashboard-heading p {
+              font-size: 0.85rem;
+          }
+          .dashboard {
+              padding: 0.8rem;
+          }
+          .dashboard-cards {
+              gap: 1rem;
+          }
+          .dashboard-chart,
+          .dashboard-Preferences {
+              padding: 1rem;
+          }
+          .dashboard-chart h2,
+          .dashboard-Preferences h2,
+          .transactions h2 {
+              font-size: 1.35rem;
+              margin-bottom: 1rem;
+          }
+          .transactions {
+              padding: 1rem;
+              margin-top: 1.5rem;
+          }
+          .settings-page {
+              margin: 1rem;
+              width: calc(100% - 2rem);
+          }
+          nav {
+              padding: 0.8rem 1rem;
+          }
+          .user-name {
+              display: none; /* Hide user name on very small screens to save space */
+          }
+          #logout {
+              padding: 0.5rem 0.8rem;
+          }
+          #logout span {
+              display: none; /* Hide text, show only icon on small mobile */
+          }
+          #logout i {
+              font-size: 1.4rem;
+          }
+      }

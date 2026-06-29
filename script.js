@@ -579,10 +579,16 @@ const settingsData = JSON.parse(localStorage.getItem("settings"));
 if (settingsData) {
   fullName.value = settingsData.name;
   currency.value = settingsData.currency;
-} else {
+} 
   const user = JSON.parse(localStorage.getItem("registerDetails"));
-  fullName.value = user.username;
-  currency.value = "$";
+
+if (!settingsData) {
+  const user = JSON.parse(localStorage.getItem("registerDetails"));
+
+  if (user) {
+    fullName.value = user.username;
+    currency.value = "$";
+  }
 }
 
 const settingsForm = document.querySelector("#settings-form");
@@ -594,13 +600,24 @@ settingsForm.addEventListener("submit", function (event) {
     currency: currency.value,
   };
 
+  // Save settings
   localStorage.setItem("settings", JSON.stringify(settingsData));
+
+  // Update registerDetails bhi
+  const user = JSON.parse(localStorage.getItem("registerDetails"));
+
+  if (user) {
+    user.username = fullName.value.trim();
+    localStorage.setItem("registerDetails", JSON.stringify(user));
+  }
+
   updateSettings();
 
   const transactions =
     JSON.parse(localStorage.getItem("transactionDetails")) || [];
 
   renderTransactions(transactions);
+
   showToast("Changes saved successfully!");
 });
 
