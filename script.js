@@ -108,8 +108,9 @@ loginBtn.addEventListener("click", function (event) {
     loginPasswordError.textContent = "Password is invalid.";
     loginPasswordError.style.opacity = "1";
   } else {
-    authContainer.style.display = "none";
+      authContainer.style.display = "none";
     localStorage.setItem("isLoggedIn", "true");
+    profileName.textContent = userDetails.username;
   }
 
   loginForm.reset();
@@ -528,11 +529,11 @@ function updateSettings() {
 }
 updateSettings();
 
-const settingsData = JSON.parse(localStorage.getItem("setting"));
+const settingsData = JSON.parse(localStorage.getItem("settings"));
 
 if (settingsData) {
-  fullName.value = settings.name;
-  currency.value = settings.currency;
+  fullName.value = settingsData.name;
+  currency.value = settingsData.currency;
 } else {
   const user = JSON.parse(localStorage.getItem("registerDetails"));
   fullName.value = user.username;
