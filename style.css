@@ -1211,6 +1211,49 @@ td {
         padding: 1rem 1.5rem;
     }
 
+    
+.cards {
+    width: 40%;
+    height: 30vh;
+    padding: 1rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: .3s;
+}
+
+.cards:hover {
+    transform: translateY(-4px);
+    border-color: var(--primary);
+}
+
+.cards i {
+    width: fit-content;
+    padding: .5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    border-radius: 7px;
+    background: var(--icon-bg);
+    color: var(--icon);
+}
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+}
+
+.cards-tag {
+    color: var(--muted);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
     .transaction-controls {
         grid-template-columns: 1fr;
     }
