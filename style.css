@@ -1116,6 +1116,9 @@ td {
 
 /* Large Tablets & Small Desktops */
 @media (max-width: 1024px) {
+    .toast{
+        z-index: 20;
+    }
     .dashboard-cards {
         flex-wrap: wrap;
     }
@@ -1145,6 +1148,9 @@ td {
 
 /* Tablets */
 @media (max-width: 768px) {
+    .toast{
+        z-index: 20;
+    }
     .layout {
         flex-direction: column;
     }
@@ -1278,6 +1284,7 @@ td {
 
 /* Mobile Phones */
 @media (max-width: 480px) {
+    
     .cards {
         width: 100%;
         padding: 1rem;
