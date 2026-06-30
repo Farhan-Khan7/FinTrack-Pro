@@ -216,7 +216,7 @@ const chart = new Chart(ctx, {
         backgroundColor: ["#22C55E", "#EF4444"],
         borderRadius: 8,
         borderWidth: 0,
-        barThickness: 150,
+        barThickness: 80,
       },
     ],
   },
